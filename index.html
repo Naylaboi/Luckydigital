@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Digital Empire - luckydigital.name.ng</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{background:#05070d;color:#f3f6fc;line-height:1.45}
+header{background:#03050a;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #d4af37;position:sticky;top:0;z-index:20;box-shadow:0 4px 18px rgba(0,0,0,.6)}
+.logo-img{height:42px;width:auto;border-radius:8px;background:#ffffff;padding:3px 8px}
+.logo-text{font-weight:900;font-size:19px;line-height:1}
+.logo-text .ld{color:#3b82f6}.logo-text .emp{color:#f5c542}
+.logo-text small{display:block;font-size:9px;letter-spacing:3px;color:#cbd5e1;font-weight:700;margin-top:2px}
+nav a{color:#e2e8f0;text-decoration:none;margin-left:16px;font-size:14px;font-weight:700;padding:6px 10px;border-radius:8px;transition:.2s}
+nav a:hover{color:#f5c542;background:#0b152c}
+.hero{background:radial-gradient(circle at top right,#163c8c 0%,#091533 45%,#04060b 100%);color:white;padding:38px 20px 32px;text-align:center;border-bottom:1px solid #1e3a8a}
+.hero-badge{display:inline-block;background:rgba(212,175,55,.15);border:1px solid #d4af37;color:#f5c542;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.hero-logo{height:62px;background:#ffffff;padding:6px 14px;border-radius:12px;margin:0 auto 14px;display:block}
+.hero h1{font-size:32px;line-height:1.15;color:#ffffff;margin-bottom:10px}
+.hero p{color:#cbd5e1;font-size:14px;max-width:520px;margin:0 auto 20px}
+.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{background:linear-gradient(135deg,#d4af37 0%,#f5c542 100%);color:#04060b;padding:12px 22px;border:none;border-radius:10px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;font-size:14px}
+.btn:hover{filter:brightness(1.07)}
+.btn-outline{background:rgba(37,99,235,.15);color:#ffffff;border:1px solid #3b82f6;padding:12px 22px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;font-size:14px}
+.btn-sm{padding:8px 12px;font-size:12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+.btn-danger{background:#dc2626;color:white}
+.btn-secondary{background:#0b1938;color:#f8fafc;border:1px solid #2563eb}
+.container{max-width:960px;margin:0 auto;padding:12px 14px}
+.section-title{font-size:21px;color:#ffffff;margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.search-box{width:100%;padding:12px 14px;margin:6px 0 10px;border:1px solid #1e3a8a;border-radius:10px;background:#0a0f1d;color:#f8fafc;font-size:14px}
+.filter-bar{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.filter-pill{background:#0c1222;color:#cbd5e1;border:1px solid #233354;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.filter-pill.active{background:#1d4ed8;color:#ffffff;border-color:#f5c542}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:6px}
+.product-card{background:#0b101d;border-radius:14px;padding:18px;border:1px solid #1e2b48;border-top:3px solid #d4af37;box-shadow:0 8px 24px rgba(0,0,0,.45);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.product-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.icon{width:46px;height:46px;border-radius:12px;background:#0a193d;border:1px solid #2563eb;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.cat-tag{display:inline-block;font-size:11px;font-weight:700;color:#f5c542;background:#1a1507;border:1px solid #d4af37;padding:3px 9px;border-radius:999px}
+.product-card h3{font-size:17px;color:#ffffff;margin-bottom:6px}
+.product-card p{font-size:13px;color:#94a3b8}
+.stock-badge{color:#60a5fa;font-weight:700;font-size:13px;margin-left:4px}
+.out-badge{color:#f87171;font-weight:700;font-size:13px;margin-left:4px}
+.product-footer{border-top:1px solid #18233c;padding-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.price{font-size:20px;font-weight:900;color:#f5c542}
+.buy-btn{background:#2563eb;color:white;border:none;padding:10px 16px;border-radius:8px;font-weight:800;cursor:pointer;font-size:13px}
+.buy-btn:hover{background:#1d4ed8}
+.buy-btn:disabled{background:#334155;color:#94a3b8;cursor:not-allowed}
+.card{background:#0b101d;margin:14px 0;border-radius:14px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.45);border:1px solid #1e2b48;border-top:3px solid #2563eb}
+.card h2,.card h3{color:#ffffff;margin-bottom:8px}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;border:1px solid #26354f;border-radius:8px;background:#050811;color:#f8fafc}
+input::placeholder,textarea::placeholder{color:#64748b}
+textarea{min-height:110px;resize:vertical;font-family:monospace;font-size:13px}
+.hidden{display:none}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.dash-stat{background:#0a193d;border:1px solid #2563eb;border-radius:10px;padding:14px}
+.dash-stat span{font-size:12px;color:#cbd5e1;display:block}
+.dash-stat b{font-size:19px;color:#f5c542;margin-top:4px;display:block}
+.wallet{background:linear-gradient(150deg,#04060b 0%,#0a193d 100%);color:white;border-radius:14px;padding:20px;margin:14px 0;border:1px solid #2563eb;border-top:3px solid #d4af37}
+.wallet h2{font-size:34px;margin:6px 0;color:#ffffff}
+.vacc{background:#050811;border:1px dashed #d4af37;border-radius:10px;padding:14px;color:#cbd5e1;margin-top:12px;font-size:13px;line-height:1.5}
+.fee-box{background:#0b152c;border:1px solid #2563eb;border-radius:10px;padding:14px;color:#e2e8f0;margin-top:12px;font-size:14px}
+.trust{background:#0a193d;border:1px solid #2563eb;border-radius:12px;padding:14px;margin:20px 0 10px;font-size:13px;text-align:center;color:#dbeafe}
+.admin-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:#0a193d;border:1px solid #2563eb;color:white;padding:15px;border-radius:10px;font-size:13px}.stat b{font-size:21px;color:#f5c542;display:block;margin-top:4px}
+.tx-item{padding:10px 0;border-bottom:1px solid #1e293b;font-size:13px;color:#e2e8f0}
+.cred-box{background:#050811;border:1px solid #d4af37;border-radius:8px;padding:10px;margin-top:8px;font-family:monospace;font-size:13px;color:#f5c542;word-break:break-all}
+.active-user-bar{background:#0a193d;border:1px solid #2563eb;border-radius:10px;padding:12px;margin-bottom:12px;font-size:13px;color:#eff6ff;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.prod-admin-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #1e293b}
+.prod-admin-actions{display:flex;gap:6px;flex-shrink:0}
+footer{text-align:center;padding:24px 16px;font-size:13px;color:#64748b;border-top:1px solid #131c31;margin-top:20px}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="Lucky Digital Empire" class="logo-img" onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='block'">
+  <div id="fallbackLogo" style="display:none" class="logo-text"><span class="ld">LUCKY</span> <span class="emp">DIGITAL</span><small>EMPIRE</small></div>
+  <nav>
+    <a href="#home" onclick="show('home');return false;">Home</a>
+    <a href="#dashboard" onclick="openUserPortal();return false;">Dashboard</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div id="home">
+  <div class="hero">
+    <div class="hero-badge">⚡ Instant Login Delivery • Paystack Secured</div>
+    <img src="logo.png" alt="Lucky Digital Empire Logo" class="hero-logo" onerror="this.style.display='none'">
+    <h1>Lucky Digital Empire</h1>
+    <p>Verified social media accounts, fast VPNs, and reliable TV access—delivered straight to your dashboard.</p>
+    <div class="hero-actions">
+      <button class="btn" onclick="openUserPortal()">Create Account &amp; Open Dashboard</button>
+      <a href="#catalog" class="btn-outline" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'});return false;">Browse Services</a>
+    </div>
+  </div>
+
+  <div class="container" id="catalog">
+    <h2 class="section-title">Explore Services</h2>
+    <input id="searchInput" class="search-box" type="text" placeholder="Search accounts, VPNs, or TV access..." oninput="renderServices()">
+
+    <div class="filter-bar" id="categoryFilterBar">
+      <button type="button" class="filter-pill active" data-cat="ALL" onclick="setCategoryFilter('ALL')">All</button>
+      <button type="button" class="filter-pill" data-cat="Facebook accounts" onclick="setCategoryFilter('Facebook accounts')">Facebook accounts</button>
+      <button type="button" class="filter-pill" data-cat="Instagram accounts" onclick="setCategoryFilter('Instagram accounts')">Instagram accounts</button>
+      <button type="button" class="filter-pill" data-cat="TikTok accounts" onclick="setCategoryFilter('TikTok accounts')">TikTok accounts</button>
+      <button type="button" class="filter-pill" data-cat="VPNs" onclick="setCategoryFilter('VPNs')">VPNs</button>
+      <button type="button" class="filter-pill" data-cat="TV access" onclick="setCategoryFilter('TV access')">TV access</button>
+    </div>
+
+    <div id="servicesList" class="services-grid"></div>
+
+    <div class="trust">🛡️ All payments secured by Paystack (Bank Transfer, Card &amp; USSD) • 24/7 support</div>
+  </div>
+</div>
+
+<!-- AUTH (SIGN UP / LOGIN WHEN NOT SIGNED IN) -->
+<div id="authView" class="hidden">
+  <div class="container">
+    <div class="card">
+      <h2>Create Account or Login</h2>
+      <p style="color:#94a3b8;font-size:13px;margin-bottom:8px">Choose a unique username to create your account and open your user dashboard.</p>
+
+      <input id="authHandle" placeholder="Unique Username e.g. chima_lucky (cannot be reused)">
+      <input id="authName" placeholder="Your Full Name e.g. Chima">
+      <input id="authEmail" type="email" placeholder="Valid Email Address e.g. chima@gmail.com">
+      <input id="authWhatsapp" type="tel" placeholder="WhatsApp Number for Order Delivery">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <button class="btn" onclick="registerUser()">Sign Up &amp; Open Dashboard</button>
+        <button class="btn btn-secondary" onclick="loginExistingUser()">Login Existing Username</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USER DASHBOARD -->
+<div id="dashboard" class="hidden">
+  <div class="container">
+    <h2 class="section-title">User Dashboard</h2>
+
+    <div class="card">
+      <div class="active-user-bar">
+        <div id="activeUserSummary"></div>
+        <button class="btn-sm btn-secondary" onclick="logoutUser()">Logout</button>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-stat">
+          <span>Username</span>
+          <b id="dashUsername">@user</b>
+        </div>
+        <div class="dash-stat">
+          <span>Orders Completed</span>
+          <b id="dashOrders">0</b>
+        </div>
+        <div class="dash-stat">
+          <span>Delivered Logins</span>
+          <b id="dashLoginsCount">0</b>
+        </div>
+        <div class="dash-stat">
+          <span>WhatsApp Delivery</span>
+          <b id="dashWhatsapp" style="font-size:15px;color:#ffffff">-</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="wallet">
+      <p style="color:#cbd5e1;font-size:13px">My Wallet Balance</p>
+      <h2>₦<span id="balance">0</span></h2>
+      <div class="fee-box">
+        <b>Fund Wallet via Paystack:</b><br>
+        ₦<span id="feeDisplay">30</span> service fee per deposit.<br><br>
+        <input id="depositAmount" type="number" placeholder="Enter amount e.g. 5000" value="5000" oninput="updateFeePreview()">
+        <button class="btn" onclick="payWithPaystack()">Pay Now with Paystack</button>
+        <p style="margin-top:8px;font-size:13px" id="feePreview">Example: Deposit ₦5,000 → Fee ₦30 → You receive <b>₦4,970</b></p>
+      </div>
+      <div class="vacc">
+        <b>How Payment Works:</b><br>
+        Click <b>Pay Now with Paystack</b> above to pay securely via <b>Instant Bank Transfer, Card, or USSD</b>. Your wallet updates immediately after payment confirmation, and account logins appear right below after purchase.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>My Purchased Logins</h3>
+      <div id="deliveredLogins" style="margin-top:8px;color:#94a3b8;font-size:13px">No account logins delivered yet.</div>
+    </div>
+
+    <div class="card">
+      <h3>Transaction History</h3>
+      <div id="history" style="margin-top:8px;color:#94a3b8;font-size:13px">No transactions yet.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div id="adminLogin" class="hidden">
+  <div class="container">
+    <div class="card">
+      <h2>Admin Login</h2>
+      <input id="adminPass" type="password" placeholder="Enter Admin Password">
+      <button class="btn" onclick="loginAdmin()">Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin" class="hidden">
+  <div class="container">
+    <h2 class="section-title">Admin Dashboard - Lucky Digital Empire</h2>
+    <div class="admin-top">
+      <div class="stat">Registered Users<b id="totalUsers">0</b></div>
+      <div class="stat">Total Orders<b id="totalOrders">0</b></div>
+      <div class="stat">Total Revenue<b>₦<span id="totalRev">0</span></b></div>
+      <div class="stat" style="background:#d4af37;color:#04060b">Service Fees Earned<b style="color:#04060b">₦<span id="totalFees">0</span></b></div>
+      <div class="stat">Total Deposits<b id="totalDeposits">0</b></div>
+    </div>
+
+    <div class="card">
+      <h3 id="productFormTitle">Create New Product</h3>
+      <input type="hidden" id="editProductId">
+      <input id="prodName" placeholder="Product Name e.g. HMA VPN 1-month access">
+      <input id="prodDesc" placeholder="Short Description e.g. Instant login delivery • 1 month access">
+      <input id="prodPrice" type="number" placeholder="Price in Naira (₦) e.g. 3000">
+      <select id="prodIcon">
+        <option value="📘|Facebook accounts">📘 Facebook accounts</option>
+        <option value="📸|Instagram accounts">📸 Instagram accounts</option>
+        <option value="🎬|TikTok accounts">🎬 TikTok accounts</option>
+        <option value="🛡️|VPNs">🛡️ VPNs</option>
+        <option value="📺|TV access">📺 TV access</option>
+      </select>
+      <label style="display:block;font-size:13px;font-weight:bold;margin-top:8px;color:#e2e8f0">
+        Account Logins Stock Pool (1 login per line — leave empty for non-credential services)
+      </label>
+      <textarea id="prodCredentials" placeholder="Paste one login per line, e.g.:&#10;hma_user1@mail.com:Pass123!&#10;hma_user2@mail.com:Pass456!"></textarea>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <button class="btn" id="saveProductBtn" onclick="saveProduct()">Add Product</button>
+        <button class="btn btn-secondary hidden" id="cancelEditBtn" onclick="resetProductForm()">Cancel Edit</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Manage Products</h3>
+      <div id="adminProductsList" style="margin-top:8px">No products yet.</div>
+    </div>
+
+    <div class="card">
+      <h3>Store Pricing &amp; Fees</h3>
+      <p style="margin-top:8px;font-size:13px">VPN 1 Month Price (₦): <input id="vpnPriceInput" type="number" value="3000"></p>
+      <p style="font-size:13px">Deposit Service Fee (₦): <input id="serviceFeeInput" type="number" value="30"></p>
+      <button class="btn" onclick="updateStoreSettings()">Save Prices &amp; Fee</button>
+    </div>
+
+    <div class="card">
+      <h3>Customer &amp; Order Logs</h3>
+      <div id="userList" style="margin-top:8px">No activity yet.</div>
+    </div>
+  </div>
+</div>
+
+<footer>Lucky Digital Empire • luckydigital.name.ng • © 2026</footer>
+
+<script>
+const PAYSTACK_PUBLIC_KEY = 'pk_live_e234d07baace69d38cc2f0c55831b16f43c6141a';
+const ADMIN_PASSWORD = 'Chima778$';
+const STORAGE_KEY = 'luckydigital_store_v1';
+
+const CATEGORIES = [
+  { key: '📘|Facebook accounts', icon: '📘', label: 'Facebook accounts' },
+  { key: '📸|Instagram accounts', icon: '📸', label: 'Instagram accounts' },
+  { key: '🎬|TikTok accounts', icon: '🎬', label: 'TikTok accounts' },
+  { key: '🛡️|VPNs', icon: '🛡️', label: 'VPNs' },
+  { key: '📺|TV access', icon: '📺', label: 'TV access' }
+];
+
+const DEFAULT_PRODUCTS = [
+  { id: 'vpn_1m', name: 'HMA VPN 1-month access', desc: 'Fast, secure & private connection • Instant login delivery', price: 3000, icon: '🛡️', category: 'VPNs', isVpn: true, credentials: [] },
+  { id: 'fb_acc', name: 'Facebook Account', desc: 'Ready-to-use account • Instant login delivery', price: 5000, icon: '📘', category: 'Facebook accounts', isVpn: false, credentials: [] },
+  { id: 'ig_acc', name: 'Instagram Account', desc: 'Ready-to-use account • Instant login delivery', price: 7000, icon: '📸', category: 'Instagram accounts', isVpn: false, credentials: [] },
+  { id: 'tt_acc', name: 'TikTok Account', desc: 'Ready-to-use account • Instant login delivery', price: 8000, icon: '🎬', category: 'TikTok accounts', isVpn: false, credentials: [] },
+  { id: 'tv_acc', name: 'TV Access Subscription', desc: 'Streaming access • Instant login delivery', price: 4500, icon: '📺', category: 'TV access', isVpn: false, credentials: [] }
+];
+
+let selectedCategoryFilter = 'ALL';
+
+function parseCategoryOption(rawVal) {
+  const matched = CATEGORIES.find(c => c.key === rawVal || c.label === rawVal || c.icon === rawVal);
+  if (matched) return { icon: matched.icon, category: matched.label, key: matched.key };
+  return { icon: '📘', category: 'Facebook accounts', key: '📘|Facebook accounts' };
+}
+
+function createEmptyUserRecord(username, name, email, whatsapp) {
+  return {
+    username,
+    name,
+    email,
+    whatsapp,
+    balance: 0,
+    orders: 0,
+    totalDeposits: 0,
+    history: [],
+    deliveredLogins: []
+  };
+}
+
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+  users: {},
+  activeUsername: null,
+  orders: 0,
+  revenue: 0,
+  totalFees: 0,
+  totalDeposits: 0,
+  serviceFee: 30,
+  vpnPrice: 3000,
+  products: DEFAULT_PRODUCTS.map(p => ({ ...p, credentials: [...p.credentials] })),
+  adminLogs: []
+};
+
+if (!state.users || typeof state.users !== 'object') state.users = {};
+if (!Array.isArray(state.products) || state.products.length === 0) {
+  state.products = DEFAULT_PRODUCTS.map(p => ({ ...p, credentials: [...p.credentials] }));
+}
+state.products.forEach(p => {
+  if (!Array.isArray(p.credentials)) p.credentials = [];
+  const parsed = parseCategoryOption(p.category || p.icon);
+  p.icon = parsed.icon;
+  p.category = parsed.category;
+  p.isVpn = parsed.category === 'VPNs';
+});
+
+function getCurrentUser() {
+  if (!state.activeUsername) return null;
+  return state.users[state.activeUsername] || null;
+}
+
+function normalizeUsername(raw) {
+  return String(raw || '').trim().toLowerCase();
+}
+
+function isValidUsername(u) {
+  return /^[a-z0-9._-]{3,24}$/.test(u);
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  renderUI();
+}
+
+function show(id) {
+  ['home', 'authView', 'dashboard', 'adminLogin', 'admin'].forEach(x => {
+    document.getElementById(x).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+
+function openUserPortal() {
+  if (getCurrentUser()) {
+    show('dashboard');
+  } else {
+    show('authView');
+  }
+}
+
+function setCategoryFilter(cat) {
+  selectedCategoryFilter = cat;
+  document.querySelectorAll('#categoryFilterBar .filter-pill').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === cat);
+  });
+  renderServices();
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function registerUser() {
+  const username = normalizeUsername(document.getElementById('authHandle').value);
+  const name = document.getElementById('authName').value.trim();
+  const email = document.getElementById('authEmail').value.trim();
+  const whatsapp = document.getElementById('authWhatsapp').value.trim();
+
+  if (!isValidUsername(username)) {
+    alert('Choose a unique username of 3-24 characters using lowercase letters, numbers, dots, underscores, or hyphens.');
+    return;
+  }
+  if (!name || !isValidEmail(email) || !whatsapp) {
+    alert('Please enter your Name, a valid Email address, and your WhatsApp number.');
+    return;
+  }
+
+  if (state.users[username]) {
+    alert(`The username "${username}" is already taken by another user. Choose a different username or click "Login Existing Username".`);
+    return;
+  }
+
+  const newUser = createEmptyUserRecord(username, name, email, whatsapp);
+  state.users[username] = newUser;
+  state.activeUsername = username;
+  state.adminLogs.unshift(`👤 New User: @${username} (${name} | ${email} | WA: ${whatsapp})`);
+  saveState();
+  show('dashboard');
+  alert(`Welcome @${username}! Your account is created and your user dashboard is now open.`);
+}
+
+function loginExistingUser() {
+  const username = normalizeUsername(document.getElementById('authHandle').value);
+  if (!username || !state.users[username]) {
+    alert('No registered account found with that username. Fill all fields and click "Sign Up & Open Dashboard" to claim a new unique username.');
+    return;
+  }
+  state.activeUsername = username;
+  saveState();
+  show('dashboard');
+}
+
+function logoutUser() {
+  state.activeUsername = null;
+  document.getElementById('authHandle').value = '';
+  document.getElementById('authName').value = '';
+  document.getElementById('authEmail').value = '';
+  document.getElementById('authWhatsapp').value = '';
+  saveState();
+  show('authView');
+}
+
+function updateFeePreview() {
+  const amt = parseInt(document.getElementById('depositAmount').value) || 0;
+  const net = Math.max(0, amt - state.serviceFee);
+  document.getElementById('feePreview').innerHTML =
+    `Deposit ₦${amt.toLocaleString()} → Fee ₦${state.serviceFee.toLocaleString()} → You receive <b>₦${net.toLocaleString()}</b>`;
+}
+
+function payWithPaystack() {
+  const user = getCurrentUser();
+  if (!user || !isValidEmail(user.email)) {
+    alert('Please sign up or log in with your unique username first.');
+    show('authView');
+    return;
+  }
+
+  const depositAmount = parseInt(document.getElementById('depositAmount').value) || 0;
+  if (depositAmount <= state.serviceFee) {
+    alert(`Deposit amount must be greater than the ₦${state.serviceFee} service fee.`);
+    return;
+  }
+
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: user.email,
+    amount: depositAmount * 100,
+    currency: 'NGN',
+    ref: 'LDE_' + Math.floor((Math.random() * 1000000000) + 1),
+    metadata: {
+      custom_fields: [
+        { display_name: 'Username', variable_name: 'username', value: user.username },
+        { display_name: 'Customer Name', variable_name: 'customer_name', value: user.name },
+        { display_name: 'WhatsApp', variable_name: 'whatsapp', value: user.whatsapp }
+      ]
+    },
+    callback: function(response) {
+      const creditAmount = depositAmount - state.serviceFee;
+      user.balance += creditAmount;
+      user.totalDeposits += 1;
+      state.totalFees += state.serviceFee;
+      state.totalDeposits += 1;
+
+      const time = new Date().toLocaleString();
+      user.history.unshift(`✅ [${time}] Deposited ₦${depositAmount.toLocaleString()} (Fee: ₦${state.serviceFee}) → Credited ₦${creditAmount.toLocaleString()} | Ref: ${response.reference}`);
+      state.adminLogs.unshift(`💰 Deposit: ₦${depositAmount.toLocaleString()} by @${user.username} (${user.name}, Ref: ${response.reference})`);
+      saveState();
+
+      alert(`Payment successful! Ref: ${response.reference}\n₦${creditAmount.toLocaleString()} has been added to @${user.username}'s wallet.`);
+    },
+    onClose: function() {
+      alert('Payment window closed.');
+    }
+  });
+
+  handler.openIframe();
+}
+
+function buyById(productId) {
+  const item = state.products.find(p => p.id === productId);
+  if (!item) return;
+
+  const user = getCurrentUser();
+  if (!user) {
+    alert('Please sign up or log in with your unique username and fund your wallet first.');
+    show('authView');
+    return;
+  }
+
+  const hasStockPool = Array.isArray(item.credentials) && item.credentials.length > 0;
+  if (hasStockPool && item.credentials.length <= 0) {
+    alert(`${item.name} is currently out of stock.`);
+    return;
+  }
+
+  const price = item.isVpn ? state.vpnPrice : item.price;
+  if (user.balance < price) {
+    alert(`Insufficient balance (₦${user.balance.toLocaleString()}). You need ₦${price.toLocaleString()}. Please fund your wallet on your dashboard first.`);
+    show('dashboard');
+    return;
+  }
+
+  user.balance -= price;
+  user.orders += 1;
+  state.orders += 1;
+  state.revenue += price;
+
+  let assignedCredential = null;
+  if (hasStockPool) {
+    assignedCredential = item.credentials.shift();
+  }
+
+  const time = new Date().toLocaleString();
+  if (assignedCredential !== null) {
+    user.deliveredLogins.unshift({
+      productName: item.name,
+      credential: assignedCredential,
+      time,
+      price
+    });
+    user.history.unshift(`🛒 [${time}] Bought ${item.name} (-₦${price.toLocaleString()}) → Login delivered`);
+    state.adminLogs.unshift(`📦 Auto-Delivered: ${item.name} (₦${price.toLocaleString()}) to @${user.username} | Remaining stock: ${item.credentials.length}`);
+    saveState();
+    show('dashboard');
+    alert(`Purchase successful for ${item.name}!\n\nYour Account Login:\n${assignedCredential}\n\nSaved under "My Purchased Logins" on your dashboard.`);
+  } else {
+    user.history.unshift(`🛒 [${time}] Ordered ${item.name} (-₦${price.toLocaleString()})`);
+    state.adminLogs.unshift(`📦 Order: ${item.name} (₦${price.toLocaleString()}) by @${user.username} | WA: ${user.whatsapp}`);
+    saveState();
+    show('dashboard');
+    alert(`Order confirmed for ${item.name}! We will deliver to your WhatsApp (${user.whatsapp}) shortly.`);
+  }
+}
+
+function loginAdmin() {
+  const entered = document.getElementById('adminPass').value;
+  if (entered === ADMIN_PASSWORD) {
+    document.getElementById('adminPass').value = '';
+    show('admin');
+  } else {
+    alert('Wrong admin password.');
+  }
+}
+
+function parseCredentialLines(rawText) {
+  return String(rawText || '')
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+}
+
+function saveProduct() {
+  const editId = document.getElementById('editProductId').value.trim();
+  const name = document.getElementById('prodName').value.trim();
+  const desc = document.getElementById('prodDesc').value.trim() || 'Fast delivery • Trusted service';
+  const price = parseInt(document.getElementById('prodPrice').value);
+  const parsedCat = parseCategoryOption(document.getElementById('prodIcon').value);
+  const credentials = parseCredentialLines(document.getElementById('prodCredentials').value);
+
+  if (!name || isNaN(price) || price <= 0) {
+    alert('Please enter a valid product name and a price greater than ₦0.');
+    return;
+  }
+
+  if (editId) {
+    const idx = state.products.findIndex(p => p.id === editId);
+    if (idx !== -1) {
+      state.products[idx].name = name;
+      state.products[idx].desc = desc;
+      state.products[idx].price = price;
+      state.products[idx].icon = parsedCat.icon;
+      state.products[idx].category = parsedCat.category;
+      state.products[idx].isVpn = parsedCat.category === 'VPNs';
+      state.products[idx].credentials = credentials;
+      if (state.products[idx].isVpn) state.vpnPrice = price;
+      state.adminLogs.unshift(`✏️ Updated Product: ${name} [${parsedCat.category}] (₦${price.toLocaleString()} | Stock: ${credentials.length})`);
+    }
+    resetProductForm();
+    saveState();
+    alert(`Updated "${name}"!`);
+  } else {
+    const newProd = {
+      id: 'prod_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      name,
+      desc,
+      price,
+      icon: parsedCat.icon,
+      category: parsedCat.category,
+      isVpn: parsedCat.category === 'VPNs',
+      credentials
+    };
+    state.products.push(newProd);
+    state.adminLogs.unshift(`➕ Created Product: ${name} [${parsedCat.category}] (₦${price.toLocaleString()} | Stock: ${credentials.length})`);
+    resetProductForm();
+    saveState();
+    alert(`Added "${name}" to Explore Services!`);
+  }
+}
+
+function startEditProduct(id) {
+  const item = state.products.find(p => p.id === id);
+  if (!item) return;
+  const effectivePrice = item.isVpn ? state.vpnPrice : item.price;
+  const parsedCat = parseCategoryOption(item.category || item.icon);
+
+  document.getElementById('editProductId').value = item.id;
+  document.getElementById('prodName').value = item.name;
+  document.getElementById('prodDesc').value = item.desc;
+  document.getElementById('prodPrice').value = effectivePrice;
+  document.getElementById('prodIcon').value = parsedCat.key;
+  document.getElementById('prodCredentials').value = Array.isArray(item.credentials) ? item.credentials.join('\n') : '';
+  document.getElementById('productFormTitle').innerText = 'Edit Product';
+  document.getElementById('saveProductBtn').innerText = 'Save Changes';
+  document.getElementById('cancelEditBtn').classList.remove('hidden');
+  document.getElementById('productFormTitle').scrollIntoView({ behavior: 'smooth' });
+}
+
+function deleteProduct(id) {
+  const item = state.products.find(p => p.id === id);
+  if (!item) return;
+  if (!confirm(`Delete "${item.name}" from your store?`)) return;
+
+  if (document.getElementById('editProductId').value === id) resetProductForm();
+  state.products = state.products.filter(p => p.id !== id);
+  state.adminLogs.unshift(`🗑️ Deleted Product: ${item.name}`);
+  saveState();
+}
+
+function resetProductForm() {
+  document.getElementById('editProductId').value = '';
+  document.getElementById('prodName').value = '';
+  document.getElementById('prodDesc').value = '';
+  document.getElementById('prodPrice').value = '';
+  document.getElementById('prodIcon').value = CATEGORIES[0].key;
+  document.getElementById('prodCredentials').value = '';
+  document.getElementById('productFormTitle').innerText = 'Create New Product';
+  document.getElementById('saveProductBtn').innerText = 'Add Product';
+  document.getElementById('cancelEditBtn').classList.add('hidden');
+}
+
+function updateStoreSettings() {
+  const newVpnPrice = parseInt(document.getElementById('vpnPriceInput').value);
+  const newFee = parseInt(document.getElementById('serviceFeeInput').value);
+
+  if (newVpnPrice > 0) {
+    state.vpnPrice = newVpnPrice;
+    state.products.forEach(p => {
+      if (p.isVpn || p.category === 'VPNs') p.price = newVpnPrice;
+    });
+  }
+  if (newFee >= 0) state.serviceFee = newFee;
+
+  saveState();
+  alert(`Updated! VPN Price: ₦${state.vpnPrice.toLocaleString()} | Service Fee: ₦${state.serviceFee.toLocaleString()}`);
+}
+
+function renderServices() {
+  const container = document.getElementById('servicesList');
+  const query = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
+
+  const filteredProducts = state.products.filter(p => {
+    const cat = parseCategoryOption(p.category || p.icon).category;
+    const matchesCat = selectedCategoryFilter === 'ALL' || cat === selectedCategoryFilter;
+    const matchesQuery = !query || p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+    return matchesCat && matchesQuery;
+  });
+
+  if (!filteredProducts.length) {
+    container.innerHTML = '<div class="card"><p>No matching services found.</p></div>';
+    return;
+  }
+
+  container.innerHTML = filteredProducts.map(p => {
+    const parsedCat = parseCategoryOption(p.category || p.icon);
+    const displayPrice = p.isVpn ? state.vpnPrice : p.price;
+    const creds = Array.isArray(p.credentials) ? p.credentials : [];
+    const hasStockPool = creds.length > 0 || p.isVpn;
+    const stockCount = creds.length;
+    const isSoldOut = hasStockPool && stockCount <= 0;
+
+    let stockLabel = '';
+    if (hasStockPool) {
+      stockLabel = isSoldOut
+        ? `<span class="out-badge">(0 available)</span>`
+        : `<span class="stock-badge">(${stockCount} available)</span>`;
+    }
+
+    return `
+      <div class="product-card">
+        <div>
+          <div class="product-top">
+            <span class="cat-tag">${escapeHtml(parsedCat.category)}</span>
+            <div class="icon">${escapeHtml(parsedCat.icon)}</div>
+          </div>
+          <h3>${escapeHtml(p.name)} ${stockLabel}</h3>
+          <p>${escapeHtml(p.desc)}</p>
+        </div>
+        <div class="product-footer">
+          <div class="price">₦${displayPrice.toLocaleString()}</div>
+          <button class="buy-btn" ${isSoldOut ? 'disabled' : ''} onclick="buyById('${escapeHtml(p.id)}')">${isSoldOut ? 'Out of Stock' : 'Buy Now'}</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderAdminProducts() {
+  const container = document.getElementById('adminProductsList');
+  if (!state.products.length) {
+    container.innerHTML = 'No products yet. Use "Create New Product" above to add one.';
+    return;
+  }
+
+  container.innerHTML = state.products.map(p => {
+    const parsedCat = parseCategoryOption(p.category || p.icon);
+    const displayPrice = p.isVpn ? state.vpnPrice : p.price;
+    const stockCount = Array.isArray(p.credentials) ? p.credentials.length : 0;
+    return `
+      <div class="prod-admin-row">
+        <div>
+          <b>${escapeHtml(parsedCat.icon)} ${escapeHtml(p.name)}</b> — ₦${displayPrice.toLocaleString()} <b>(${stockCount} logins in stock)</b><br>
+          <small style="color:#94a3b8">${escapeHtml(parsedCat.category)} • ${escapeHtml(p.desc)}</small>
+        </div>
+        <div class="prod-admin-actions">
+          <button class="btn-sm btn-secondary" onclick="startEditProduct('${escapeHtml(p.id)}')">Edit</button>
+          <button class="btn-sm btn-danger" onclick="deleteProduct('${escapeHtml(p.id)}')">Delete</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderUI() {
+  renderServices();
+  renderAdminProducts();
+
+  const user = getCurrentUser();
+  if (user) {
+    document.getElementById('activeUserSummary').innerHTML =
+      `Signed in as <b>@${escapeHtml(user.username)}</b> (${escapeHtml(user.name)})`;
+    document.getElementById('dashUsername').innerText = `@${user.username}`;
+    document.getElementById('dashOrders').innerText = user.orders || 0;
+    document.getElementById('dashLoginsCount').innerText = (user.deliveredLogins || []).length;
+    document.getElementById('dashWhatsapp').innerText = user.whatsapp || '-';
+  } else {
+    document.getElementById('activeUserSummary').innerHTML = '';
+    document.getElementById('dashUsername').innerText = '@user';
+    document.getElementById('dashOrders').innerText = '0';
+    document.getElementById('dashLoginsCount').innerText = '0';
+    document.getElementById('dashWhatsapp').innerText = '-';
+  }
+
+  document.getElementById('balance').innerText = (user ? user.balance : 0).toLocaleString();
+  document.getElementById('feeDisplay').innerText = state.serviceFee.toLocaleString();
+  document.getElementById('vpnPriceInput').value = state.vpnPrice;
+  document.getElementById('serviceFeeInput').value = state.serviceFee;
+  updateFeePreview();
+
+  const loginsEl = document.getElementById('deliveredLogins');
+  if (!user) {
+    loginsEl.innerHTML = 'Sign up or log in with your unique username to view delivered logins.';
+  } else if (!user.deliveredLogins || !user.deliveredLogins.length) {
+    loginsEl.innerHTML = 'No account logins delivered yet.';
+  } else {
+    loginsEl.innerHTML = user.deliveredLogins.map(item => `
+      <div class="tx-item">
+        <b>${escapeHtml(item.productName)}</b> <span style="color:#94a3b8">(${escapeHtml(item.time)})</span>
+        <div class="cred-box">${escapeHtml(item.credential)}</div>
+      </div>
+    `).join('');
+  }
+
+  const histEl = document.getElementById('history');
+  if (!user || !user.history.length) {
+    histEl.innerHTML = 'No transactions yet.';
+  } else {
+    histEl.innerHTML = user.history.map(h => `<div class="tx-item">${escapeHtml(h)}</div>`).join('');
+  }
+
+  const usersList = Object.values(state.users);
+  document.getElementById('totalUsers').innerText = usersList.length;
+  document.getElementById('totalOrders').innerText = state.orders;
+  document.getElementById('totalRev').innerText = state.revenue.toLocaleString();
+  document.getElementById('totalFees').innerText = state.totalFees.toLocaleString();
+  document.getElementById('totalDeposits').innerText = state.totalDeposits;
+
+  const logsEl = document.getElementById('userList');
+  if (!state.adminLogs.length) {
+    logsEl.innerHTML = 'No activity yet.';
+  } else {
+    logsEl.innerHTML = state.adminLogs.map(l => `<div class="tx-item">${escapeHtml(l)}</div>`).join('');
+  }
+}
+
+function handleDirectAdminRoute() {
+  const hash = window.location.hash.toLowerCase();
+  const search = window.location.search.toLowerCase();
+  if (hash === '#admin' || search.includes('admin=1') || search.includes('admin')) {
+    show('adminLogin');
+  }
+}
+
+renderUI();
+handleDirectAdminRoute();
+</script>
+</body>
+</html>
